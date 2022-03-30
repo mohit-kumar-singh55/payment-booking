@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Image from 'next/image';
 import userImage from "../public/Images/userImage.png";
-import greenTick from "../public/Images/greenTick.svg";
 import hat from "../public/Images/hat.svg";
 import ukFlag from "../public/Images/ukFlag.svg";
-import PopUpButton from './Utils/PopUpButton';
 
-const PaymentProfileContainer = ({ openPopUp, setOpenPopUp }) => {
+const PaymentProfileContainer = ({ openPopUp, setOpenPopUp, totalSelectedTimes }) => {
+    let baseTotal = totalSelectedTimes * 10;
+    let transactionFee = baseTotal / 10;                                    // 10% of BT
+    let subTotal = baseTotal + transactionFee;
+    let couponDiscount = subTotal / 10;                                     // 10% of ST
+    let karmaPoints = Math.round(5 * subTotal) / 100;                                 // 5% of ST
+    let discountedTotal = Math.round(subTotal - couponDiscount) - karmaPoints;
+    let tax1 = Math.round(9 * discountedTotal) / 100;                                    // 9% of DT
+    let tax2 = Math.round(9 * discountedTotal) / 100;
+    let finalPayableTotal = Math.round(discountedTotal + tax1) + tax2;                               // 9% of DT
+
     return (
         <div className='w-[406px] h-[594px] sm:w-[490px] sm:h-[683px] flex flex-col gap-4'>
             {/* Profile */}
@@ -49,7 +57,7 @@ const PaymentProfileContainer = ({ openPopUp, setOpenPopUp }) => {
             <div className='sm:w-[491px] sm:h-[109px] w-[406px] h-[97px] flex justify-between text-[18px] sm:text-lg font-roboto font-bold bg-[#FBFBFB] rounded-lg sm:px-[23px] sm:py-[13px] px-[15px] py-[12px]'>
                 <div className='flex flex-col justify-between sm:items-start items-center'>
                     <p className=' text-[#9D9898] '>Total Sessions</p>
-                    <p className='text-[#2D2D2D]'>21 Hrs <small onClick={() => setOpenPopUp(openPopUp ? false : true)} className='font-poppins cursor-pointer font-medium text-[#FC4D6D] ml-2 sm:pb-[1px] pb-[0.5px] border-b border-b-[#FC4D6D]'>Edit</small></p>
+                    <p className='text-[#2D2D2D]'>{totalSelectedTimes} Hrs <small onClick={() => setOpenPopUp(openPopUp ? false : true)} className='font-poppins cursor-pointer font-medium text-[#FC4D6D] ml-2 sm:pb-[1px] pb-[0.5px] border-b border-b-[#FC4D6D]'>Edit</small></p>
                 </div>
                 <div className='flex flex-col justify-between'>
                     <p className='text-[#9D9898]'>Fee/Hr</p>
@@ -57,7 +65,7 @@ const PaymentProfileContainer = ({ openPopUp, setOpenPopUp }) => {
                 </div>
                 <div className='flex flex-col justify-between sm:items-end items-center'>
                     <p className='text-[#9D9898]'>Base Total</p>
-                    <p className='text-[#2D2D2D]'>$210</p>
+                    <p className='text-[#2D2D2D]'>${baseTotal}</p>
                 </div>
             </div>
 
@@ -66,15 +74,15 @@ const PaymentProfileContainer = ({ openPopUp, setOpenPopUp }) => {
                 <div className='flex flex-col justify-between h-[85%] border-b border-b-[#565656] pb-4'>
                     <div className='flex items-center justify-between'>
                         <p>Base Total &#40;Total 21 hours x $10&#41;</p>
-                        <p>$210</p>
+                        <p>${baseTotal}</p>
                     </div>
                     <div className='flex items-center justify-between'>
                         <p>Transactional Fee</p>
-                        <p>$21</p>
+                        <p>${transactionFee}</p>
                     </div>
                     <div className='flex items-center justify-between'>
                         <p>Sub Total</p>
-                        <p>$231</p>
+                        <p>${subTotal}</p>
                     </div>
                     <div className='flex items-center justify-between'>
                         <p className='border-b-[1.5px] border-b-[#A9A9A9]'>Apply Coupon Dscount</p>
@@ -82,7 +90,7 @@ const PaymentProfileContainer = ({ openPopUp, setOpenPopUp }) => {
                             <button className='w-[127px] h-[21.9px] sm:w-[145px] sm:h-[25px] text-[13px] sm:text[14px] rounded-md text-[#A9A9A9] font-semibold border border-[#A9A9A9]'>
                                 XMASTEN
                             </button>
-                            <p className='text-[#FC4D6D]'>-$23.10</p>
+                            <p className='text-[#FC4D6D]'>-${couponDiscount}</p>
                         </div>
                     </div>
                     <div className='flex items-center justify-between'>
@@ -91,27 +99,27 @@ const PaymentProfileContainer = ({ openPopUp, setOpenPopUp }) => {
                             <button className='w-[127px] h-[21.9px] sm:w-[145px] sm:h-[25px] text-[13px] sm:text[14px] rounded-md text-[#A9A9A9] font-semibold border border-[#A9A9A9]'>
                                 11.5 Points
                             </button>
-                            <p className='text-[#FC4D6D]'>-$23.10</p>
+                            <p className='text-[#FC4D6D]'>-${karmaPoints}</p>
                         </div>
                     </div>
                     <div className='flex items-center justify-between'>
                         <p>Discounted Total</p>
-                        <p className='text-[#15C11C]'>$196.35</p>
+                        <p className='text-[#15C11C]'>${discountedTotal}</p>
                     </div>
                     <div className='flex items-center justify-between'>
                         <p>Tax 1</p>
-                        <p>$17.63</p>
+                        <p>${tax1}</p>
                     </div>
                     <div className='flex items-center justify-between'>
                         <p>Tax 2</p>
-                        <p>$17.67</p>
+                        <p>${tax2}</p>
                     </div>
                 </div>
 
                 {/* Total */}
                 <div className='flex items-center justify-between h-[10%] mt-3 font-semibold text-lg'>
                     <p>Final Payable Total</p>
-                    <p className='text-[#5F5F5F]'>$231.69</p>
+                    <p className='text-[#5F5F5F]'>${finalPayableTotal}</p>
                 </div>
             </div>
 

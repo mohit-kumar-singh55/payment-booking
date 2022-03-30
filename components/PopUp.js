@@ -1,11 +1,11 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import LeftArrowButton from "./Utils/LeftArrowButton";
 import RightArrowButton from "./Utils/RightArrowButton";
 import { addDays, startOfDay, startOfWeek, format, nextDay, previousDay, isToday, isPast } from "date-fns";
 import CrossIcon from '../Icons/CrossIcon';
 import PopUpButton from './Utils/PopUpButton';
 
-const PopUp = ({ setOpenPopUp }) => {
+const PopUp = ({ setOpenPopUp, setTotalSelectedTimes }) => {
     const [selectedTimes, setSelectedTimes] = useState([]);
     const [weekDates, setWeekDates] = useState(takeWeek());
     const copyTimeRef = useRef();
@@ -38,10 +38,6 @@ const PopUp = ({ setOpenPopUp }) => {
 
     // to store the timeslots with their dates
     const handleTimeSlot = (rowIndex, colIndex) => {
-        // if ((selectedTimes.filter((key) => key?.date === weekDates[rowIndex].toDateString() && key?.time === randomTime[rowIndex][colIndex])).length > 0) {
-        //     const tempSelected = [...selectedTimes].filter((date) => date?.date !== weekDates[rowIndex].toDateString() && date?.time !== randomTime[rowIndex][colIndex])
-        //     setSelectedTimes(tempSelected);
-        // }
         if ((selectedTimes.filter((key) => key.id === (weekDates[rowIndex].toDateString().split(' ').join('') + randomTime[rowIndex][colIndex]))).length > 0) {
             const tempSelected = [...selectedTimes].filter((key) => key.id !== (weekDates[rowIndex].toDateString().split(' ').join('') + randomTime[rowIndex][colIndex]))
             setSelectedTimes(tempSelected);
@@ -57,10 +53,16 @@ const PopUp = ({ setOpenPopUp }) => {
             tempSelected.push(newTime);
 
             setSelectedTimes(tempSelected);
+
+            // setSelectedTimes(selectedTimes.length);
         }
     }
 
     console.log(selectedTimes);
+    useEffect(() => {
+        setTotalSelectedTimes(selectedTimes?.length);
+    }, [selectedTimes, setTotalSelectedTimes])
+
 
     // on click of right button
     const handleNextWeek = () => {
@@ -152,7 +154,7 @@ const PopUp = ({ setOpenPopUp }) => {
                                     <div key={rowIndex} className='flex flex-col w-full gap-3'>
                                         {times.length > 0 ? (
                                             times?.map((time, colIndex) => (
-                                                <p key={colIndex} className={`font-medium sm:font-semibold text-sm px-[3px] sm:px-3 sm:py-[1px] rounded-full cursor-pointer transition duration-200 text-center ${(selectedTimes.filter((key) => key.id === (weekDates[rowIndex].toDateString().split(' ').join('') + randomTime[rowIndex][colIndex]))).length > 0 ? 'bg-[#FC4D6D] text-white' : ''}`}
+                                                <p key={colIndex} className={`font-medium sm:font-semibold text-sm px-[3px] sm:px-3 sm:py-[1px] rounded-full cursor-pointer transition duration-200 text-center ${(selectedTimes?.filter((key) => key.id === (weekDates[rowIndex].toDateString().split(' ').join('') + randomTime[rowIndex][colIndex]))).length > 0 ? 'bg-[#FC4D6D] text-white' : ''}`}
                                                     onClick={() => handleTimeSlot(rowIndex, colIndex)}
                                                 >
                                                     {time}
