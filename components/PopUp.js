@@ -93,7 +93,7 @@ const PopUp = ({ setOpenPopUp, setTotalSelectedTimes }) => {
             {/* top */}
             <div className='flex w-full h-10 justify-between items-center px-5 py-7 border-b border-[#DCDCDC]'>
                 <p className='font-bold text-xl'>Select Your Hourly Slots</p>
-                <span onClick={() => setOpenPopUp(false)}>
+                <span onClick={() => setOpenPopUp({ ...false, calendarPopUp: false })}>
                     <CrossIcon />
                 </span>
             </div>
@@ -187,7 +187,7 @@ const PopUp = ({ setOpenPopUp, setTotalSelectedTimes }) => {
                     <PopUpButton label="Proceed" />
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

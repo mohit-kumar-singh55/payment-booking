@@ -3,19 +3,19 @@ import PopUp from '../components/PopUp';
 import CouponPopUp from './CouponPopUp';
 import KarmaPopUp from './KarmaPopUp';
 
-const PopUpContainer = ({ openPopUp, setOpenPopUp, setTotalSelectedTimes, setCouponOpen, couponOpen, karmaOpen, setKarmaOpen }) => {
+const PopUpContainer = ({ openPopUp, setOpenPopUp, setTotalSelectedTimes }) => {
     return (
         <div className='w-[406px] h-[594px] sm:w-[521px] sm:h-[683px] bg-[#FFFFFF] rounded-3xl shadow-md'>
-            {openPopUp && (
+            {openPopUp.calendarPopUp && (
                 <PopUp setOpenPopUp={setOpenPopUp} setTotalSelectedTimes={setTotalSelectedTimes} />
             )}
 
-            {couponOpen && (
-                <CouponPopUp setCouponOpen={setCouponOpen} />
+            {openPopUp.couponPopUp && (
+                <CouponPopUp setOpenPopUp={setOpenPopUp} />
             )}
 
-            {karmaOpen && (
-                <KarmaPopUp setKarmaOpen={setKarmaOpen} />
+            {openPopUp.karmaPopUp && (
+                <KarmaPopUp setOpenPopUp={setOpenPopUp} />
             )}
         </div>
     )
