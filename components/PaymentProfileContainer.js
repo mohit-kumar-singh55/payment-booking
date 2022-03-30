@@ -4,7 +4,7 @@ import userImage from "../public/Images/userImage.png";
 import hat from "../public/Images/hat.svg";
 import ukFlag from "../public/Images/ukFlag.svg";
 
-const PaymentProfileContainer = ({ openPopUp, setOpenPopUp, totalSelectedTimes }) => {
+const PaymentProfileContainer = ({ openPopUp, setOpenPopUp, totalSelectedTimes, setKarmaOpen, setCouponOpen }) => {
     let baseTotal = totalSelectedTimes * 10;
     let transactionFee = baseTotal / 10;                                    // 10% of BT
     let subTotal = baseTotal + transactionFee;
@@ -87,7 +87,8 @@ const PaymentProfileContainer = ({ openPopUp, setOpenPopUp, totalSelectedTimes }
                     <div className='flex items-center justify-between'>
                         <p className='border-b-[1.5px] border-b-[#A9A9A9]'>Apply Coupon Dscount</p>
                         <div className='flex items-center gap-3'>
-                            <button className='w-[127px] h-[21.9px] sm:w-[145px] sm:h-[25px] text-[13px] sm:text[14px] rounded-md text-[#A9A9A9] font-semibold border border-[#A9A9A9]'>
+                            <button onClick={() => setCouponOpen(true)}
+                                className='w-[127px] h-[21.9px] sm:w-[145px] sm:h-[25px] text-[13px] sm:text[14px] rounded-md text-[#A9A9A9] font-semibold border border-[#A9A9A9]'>
                                 XMASTEN
                             </button>
                             <p className='text-[#FC4D6D]'>-${couponDiscount}</p>
@@ -96,7 +97,8 @@ const PaymentProfileContainer = ({ openPopUp, setOpenPopUp, totalSelectedTimes }
                     <div className='flex items-center justify-between'>
                         <p className='border-b-[1.5px] border-b-[#A9A9A9]'>Apply Karma Points</p>
                         <div className='flex items-center gap-3'>
-                            <button className='w-[127px] h-[21.9px] sm:w-[145px] sm:h-[25px] text-[13px] sm:text[14px] rounded-md text-[#A9A9A9] font-semibold border border-[#A9A9A9]'>
+                            <button onClick={() => setKarmaOpen(true)}
+                                className='w-[127px] h-[21.9px] sm:w-[145px] sm:h-[25px] text-[13px] sm:text[14px] rounded-md text-[#A9A9A9] font-semibold border border-[#A9A9A9]'>
                                 11.5 Points
                             </button>
                             <p className='text-[#FC4D6D]'>-${karmaPoints}</p>
