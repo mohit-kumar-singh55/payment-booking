@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
-import LeftArrowButton from "./Utils/LeftArrowButton";
-import RightArrowButton from "./Utils/RightArrowButton";
+import LeftArrowButton from "../Utils/LeftArrowButton";
+import RightArrowButton from "../Utils/RightArrowButton";
 import { addDays, startOfDay, startOfWeek, format, nextDay, previousDay, isToday, isPast } from "date-fns";
-import CrossIcon from '../Icons/CrossIcon';
-import PopUpButton from './Utils/PopUpButton';
+import CrossIcon from '../../Icons/CrossIcon';
+import PopUpButton from '../Utils/PopUpButton';
 
-const PopUp = ({ setOpenPopUp, setTotalSelectedTimes }) => {
+const CalenderPopUp = ({ setOpenPopUp, setTotalSelectedTimes }) => {
     const [selectedTimes, setSelectedTimes] = useState([]);
     const [weekDates, setWeekDates] = useState(takeWeek());
     const copyTimeRef = useRef();
@@ -191,4 +191,4 @@ const PopUp = ({ setOpenPopUp, setTotalSelectedTimes }) => {
     )
 }
 
-export default PopUp;
+export default CalenderPopUp;

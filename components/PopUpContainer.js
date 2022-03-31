@@ -1,21 +1,21 @@
 import React from 'react';
-import PopUp from '../components/PopUp';
-import CouponPopUp from './CouponPopUp';
-import KarmaPopUp from './KarmaPopUp';
+import CalenderPopUp from './PopUps/CalenderPopUp';
+import CouponPopUp from './PopUps/CouponPopUp';
+import KarmaPopUp from './PopUps/KarmaPopUp';
 
-const PopUpContainer = ({ openPopUp, setOpenPopUp, setTotalSelectedTimes }) => {
+const PopUpContainer = ({ openPopUp, setOpenPopUp, setTotalSelectedTimes, totalSelectedTimes }) => {
     return (
         <div className='w-[406px] h-[594px] sm:w-[521px] sm:h-[683px] bg-[#FFFFFF] rounded-3xl shadow-md'>
             {openPopUp.calendarPopUp && (
-                <PopUp setOpenPopUp={setOpenPopUp} setTotalSelectedTimes={setTotalSelectedTimes} />
+                <CalenderPopUp setOpenPopUp={setOpenPopUp} setTotalSelectedTimes={setTotalSelectedTimes} />
             )}
 
             {openPopUp.couponPopUp && (
-                <CouponPopUp setOpenPopUp={setOpenPopUp} />
+                <CouponPopUp setOpenPopUp={setOpenPopUp} totalSelectedTimes={totalSelectedTimes} />
             )}
 
             {openPopUp.karmaPopUp && (
-                <KarmaPopUp setOpenPopUp={setOpenPopUp} />
+                <KarmaPopUp setOpenPopUp={setOpenPopUp} totalSelectedTimes={totalSelectedTimes} />
             )}
         </div>
     )

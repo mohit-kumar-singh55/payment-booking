@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PaymentProfileContainer from './PaymentProfileContainer';
 import PopUpContainer from './PopUpContainer';
 
@@ -12,7 +12,7 @@ const PaymentCheckOutContainer = () => {
 
     return (
         <div className='flex w-full min-h-fit h-full py-10 flex-wrap-reverse justify-center gap-10 mx-auto items-center bg-[#F8D3A87A]'>
-            <PopUpContainer setOpenPopUp={setOpenPopUp} openPopUp={openPopUp} setTotalSelectedTimes={setTotalSelectedTimes} />
+            <PopUpContainer setOpenPopUp={setOpenPopUp} totalSelectedTimes={totalSelectedTimes} openPopUp={openPopUp} setTotalSelectedTimes={setTotalSelectedTimes} />
             <PaymentProfileContainer setOpenPopUp={setOpenPopUp} totalSelectedTimes={totalSelectedTimes} openPopUp={openPopUp} />
         </div>
     )
