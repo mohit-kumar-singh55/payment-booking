@@ -7,6 +7,7 @@ const PaymentCheckOutContainer = () => {
         calendarPopUp: false,
         couponPopUp: false,
         karmaPopUp: false,
+        walletPopUp: false,
     })
     const [totalSelectedTimes, setTotalSelectedTimes] = useState(0);
 

@@ -2,6 +2,7 @@ import React from 'react';
 import CalenderPopUp from './PopUps/CalenderPopUp';
 import CouponPopUp from './PopUps/CouponPopUp';
 import KarmaPopUp from './PopUps/KarmaPopUp';
+import WalletPopUp from './PopUps/WalletPopUp';
 
 const PopUpContainer = ({ openPopUp, setOpenPopUp, setTotalSelectedTimes, totalSelectedTimes }) => {
     return (
@@ -16,6 +17,10 @@ const PopUpContainer = ({ openPopUp, setOpenPopUp, setTotalSelectedTimes, totalS
 
             {openPopUp.karmaPopUp && (
                 <KarmaPopUp setOpenPopUp={setOpenPopUp} totalSelectedTimes={totalSelectedTimes} />
+            )}
+
+            {openPopUp.walletPopUp && (
+                <WalletPopUp setOpenPopUp={setOpenPopUp} totalSelectedTimes={totalSelectedTimes} />
             )}
         </div>
     )
