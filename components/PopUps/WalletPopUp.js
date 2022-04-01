@@ -8,12 +8,7 @@ const WalletPopUp = ({ setOpenPopUp, totalSelectedTimes }) => {
     return (
         <div className='w-[406px] h-[594px] sm:w-[521px] sm:h-[683px] text-[#FC4D6D] rounded-3xl bg-white'>
             {/* top */}
-            <div className='flex w-full h-10 justify-between items-center px-5 py-7 border-b border-[#DCDCDC]'>
-                <p className='font-bold text-xl'>Pay From Wallet</p>
-                <span onClick={() => setOpenPopUp({ ...false, walletPopUp: false })}>
-                    <CrossIcon />
-                </span>
-            </div>
+            <TopHeader setOpenPopUp={setOpenPopUp} />
 
             {/* main */}
             <div className='flex flex-col sm:px-4 sm:py-2 p-2 pt-4 w-full items-center'>
@@ -43,36 +38,65 @@ const WalletPopUp = ({ setOpenPopUp, totalSelectedTimes }) => {
                                 </p>
                                 {/* gradient circle */}
                                 <span className='absolute w-[300px] h-[300px] rounded-full bg-gradient-to-r from-transparent to-[#FFB65D96] sm:-top-[122px] sm:-left-[85px] -top-[142px] -left-[124px]' />
-                                <div className='flex justify-between items-center z-10'>
-                                    <p className='font-extrabold text-[22.13px] sm:text-[29px]'>
-                                        $10 extra
-                                    </p>
-                                    <button className='border-none bg-[#FFFFFF] text-[#FC4D6D] sm:text-[15px] text-[12px] sm:w-[87px] sm:h-[27px] w-[71.11px] h-[22.07px] font-bold text-center rounded-full'>
-                                        Buy Now
-                                    </button>
-                                </div>
+                                {/* map on this cards component */}
+                                <Cards />
                             </div>
                         </div>
                     </div>
                 </div>
 
                 {/* bottom */}
-                <div className='flex items-center justify-between gap-4 w-full px-3 bottom-0'>
-                    {/* Left */}
-                    <div className='flex justify-center items-center gap-2'>
-                        <div className='text-[#373737] font-medium'>
-                            <p className='text-right sm:text-lg '>Total Hourly</p>
-                            <p>Sessions Selected</p>
-                        </div>
-                        <h2 className='font-bold text-5xl'>{totalSelectedTimes}</h2>
-                    </div>
-
-                    {/* Right */}
-                    <PopUpButton label="Proceed" />
-                </div>
+                <BottomButton totalSelectedTimes={totalSelectedTimes} />
             </div>
         </div>
     )
 }
 
-export default WalletPopUp
+export default WalletPopUp;
+
+// Top Title
+const TopHeader = ({ setOpenPopUp }) => {
+    return (
+        <div className='flex w-full h-10 justify-between items-center px-5 py-7 border-b border-[#DCDCDC]'>
+            <p className='font-bold text-xl'>Pay From Wallet</p>
+            <span onClick={() => setOpenPopUp({ ...false, walletPopUp: false })}>
+                <CrossIcon />
+            </span>
+        </div>
+    )
+}
+
+
+// Cards
+const Cards = () => {
+    return (
+        <div className='flex justify-between items-center z-10'>
+            <p className='font-extrabold text-[22.13px] sm:text-[29px]'>
+                $10 extra
+            </p>
+            <button className='border-none bg-[#FFFFFF] text-[#FC4D6D] sm:text-[15px] text-[12px] sm:w-[87px] sm:h-[27px] w-[71.11px] h-[22.07px] font-bold text-center rounded-full'>
+                Buy Now
+            </button>
+        </div>
+    )
+}
+
+
+// Bottom Button and Sessions selected
+const BottomButton = ({ totalSelectedTimes }) => {
+    return (
+        <div className='flex items-center justify-between gap-4 w-full px-3 bottom-0'>
+            {/* Left */}
+            <div className='flex justify-center items-center gap-2'>
+                <div className='text-[#373737] font-medium'>
+                    <p className='text-right sm:text-lg '>Total Hourly</p>
+                    <p>Sessions Selected</p>
+                </div>
+                <h2 className='font-bold text-5xl'>{totalSelectedTimes}</h2>
+            </div>
+
+            {/* Right */}
+            <PopUpButton label="Proceed" />
+        </div>
+    )
+}

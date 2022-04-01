@@ -58,7 +58,11 @@ const CalenderPopUp = ({ setOpenPopUp, setTotalSelectedTimes }) => {
         }
     }
 
+
+    // *************** Selected items are stored in an array with Date and Time selected and Id is to filter tham individually ********************
     console.log(selectedTimes);
+
+
     useEffect(() => {
         setTotalSelectedTimes(selectedTimes?.length);
     }, [selectedTimes, setTotalSelectedTimes])
@@ -91,12 +95,7 @@ const CalenderPopUp = ({ setOpenPopUp, setTotalSelectedTimes }) => {
     return (
         <div className='w-[406px] h-[594px] sm:w-[521px] sm:h-[683px] text-[#FC4D6D] rounded-3xl bg-white'>
             {/* top */}
-            <div className='flex w-full h-10 justify-between items-center px-5 py-7 border-b border-[#DCDCDC]'>
-                <p className='font-bold text-xl'>Select Your Hourly Slots</p>
-                <span onClick={() => setOpenPopUp({ ...false, calendarPopUp: false })}>
-                    <CrossIcon />
-                </span>
-            </div>
+            <TopHeader setOpenPopUp={setOpenPopUp} />
 
             {/* main */}
             <div className='flex flex-col sm:px-4 sm:py-2 p-2 pt-4 w-full items-center'>
@@ -173,22 +172,43 @@ const CalenderPopUp = ({ setOpenPopUp, setTotalSelectedTimes }) => {
                 </div>
 
                 {/* bottom */}
-                <div className='flex items-center justify-between gap-4 w-full px-3 bottom-0'>
-                    {/* Left */}
-                    <div className='flex justify-center items-center gap-2'>
-                        <div className='text-[#373737] font-medium'>
-                            <p className='text-right sm:text-lg '>Total Hourly</p>
-                            <p>Sessions Selected</p>
-                        </div>
-                        <h2 className='font-bold text-5xl'>{selectedTimes.length}</h2>
-                    </div>
-
-                    {/* Right */}
-                    <PopUpButton label="Proceed" />
-                </div>
+                <BottomButton selectedTimes={selectedTimes} />
             </div>
         </div >
     )
 }
 
 export default CalenderPopUp;
+
+
+// Top Title
+const TopHeader = ({ setOpenPopUp }) => {
+    return (
+        <div className='flex w-full h-10 justify-between items-center px-5 py-7 border-b border-[#DCDCDC]'>
+            <p className='font-bold text-xl'>Pay From Wallet</p>
+            <span onClick={() => setOpenPopUp({ ...false, walletPopUp: false })}>
+                <CrossIcon />
+            </span>
+        </div>
+    )
+}
+
+
+// Bottom Button and Sessions selected
+const BottomButton = ({ selectedTimes }) => {
+    return (
+        <div className='flex items-center justify-between gap-4 w-full px-3 bottom-0'>
+            {/* Left */}
+            <div className='flex justify-center items-center gap-2'>
+                <div className='text-[#373737] font-medium'>
+                    <p className='text-right sm:text-lg '>Total Hourly</p>
+                    <p>Sessions Selected</p>
+                </div>
+                <h2 className='font-bold text-5xl'>{selectedTimes.length}</h2>
+            </div>
+
+            {/* Right */}
+            <PopUpButton label="Proceed" />
+        </div>
+    )
+}
